@@ -1,0 +1,44 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 100%;
+    padding: 50px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.list {
+    display: flex;
+    align-items: center;
+    gap: 25px
+
+}
+
+.logo{
+    font-weight: bold;
+    font-size: 40px;
+    transition: 0.5s;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.logo:hover {
+    color: rgb(228, 158, 28);
+    transition: 0.5s;
+}
+
+.txt{
+    font-weight: 500;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.txt:hover {
+   color: rgb(228, 158, 28);
+   transition: 0.5s;
+}
