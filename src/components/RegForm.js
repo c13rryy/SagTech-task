@@ -1,37 +1,34 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import classes from './LoginForm.module.css';
-import { useDispatch } from 'react-redux';
-import { login as loginHandler } from "../store/auth";
-import {  useNavigate } from "react-router-dom";
-import { register } from '../firebase';
+import PropTypes from 'prop-types';
 
 
-const RegForm = () => {
-    /* const location = useLocation();
-    const page = location.pathname === '/reg'; */
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+
+
+const RegForm = (props) => {
+
+  const location = useLocation();
+  const page = location.pathname === '/reg';
 
     const [email, setEmail] = useState('');
 
     const [password, setPassword] = useState('');
   
-    const handleSubmit = async (e) => {
+    const handleSubmitReg = async (e) => {
       e.preventDefault();
-      const user = await register(email, password);
-      console.log(user);
-      if(user){
-        dispatch(loginHandler({
-          email: user.email,
-          uid: user.uid,
-          token: user.accessToken,
-        }));
+       
+        props.onSubmitReg(email, password);
 
-        navigate('/', {
-          replace: true,
-        })
-       }
+      
+    }
+
+    const handleSubmitLogin = async (e) => {
+      e.preventDefault();
+
+
+        props.onSubmitLogin(email,password);
+      
     }
   
     
@@ -39,8 +36,8 @@ const RegForm = () => {
   return (
     <React.Fragment>
       <section className={classes.sectionForm}>
-        <h1>reg</h1>
-      <form onSubmit={handleSubmit} className={classes.form}>
+        <h1>{page ? 'reg' : 'lgoin' }</h1>
+      <form onSubmit={page ? handleSubmitReg : handleSubmitLogin } className={classes.form}>
         <div>
           <label htmlFor="email">Email</label>
           <input  value={email} id="email" type="email" name="email" onChange={e => setEmail(e.target.value)}  />
@@ -50,7 +47,7 @@ const RegForm = () => {
           <input value={password} id="password" type="password" name="password" onChange={e => setPassword(e.target.value)}  />
         </div>
         <div className={classes.buttons}>
-            <Link className={classes.signup} to='/login'>login in</Link>
+            <Link className={classes.signup} to={page ?'/login' : '/reg'}>{page ? 'Login in' : 'Registr'}</Link>
             <button>Send</button>
         </div>
       </form>
@@ -59,6 +56,17 @@ const RegForm = () => {
     </React.Fragment>
   );
 };
+
+RegForm.propTypes = {
+  onSubmitReg: PropTypes.func.isRequired,
+  onSubmitLogin: PropTypes.func.isRequired,
+};
+
+RegForm.defaultProps = {
+  onSubmitReg: () => {},
+  onSubmitLogin: () => {},
+};
+
 
 
 export default RegForm;

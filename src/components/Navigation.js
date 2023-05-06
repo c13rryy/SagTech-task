@@ -3,13 +3,15 @@ import React from 'react';
 import classes from './Navigation.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from "../firebase";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
 import { logout as logoutHandle } from "../store/auth";
 
+
 const Navigation = () => {
+  const { user } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async() => {
@@ -19,6 +21,7 @@ const Navigation = () => {
         replace: true,
     })
 }
+
   return (
     <header className={classes.header}>
       <div>
@@ -26,13 +29,17 @@ const Navigation = () => {
       </div>
       <nav >
         <ul className={classes.list}>
-          <li>
-            <Link to='reg' className={classes.txt}>Authentication</Link>
-          </li>
+          {!user && <li>
+            <Link to='reg' className={classes.txt}>Auth</Link>
+            </li>}              
 
-          <li>
-          <button onClick={handleLogout}>ss</button> 
-          </li>
+           {user && <li>
+            <Link to='/' className={classes.txt}>Create task</Link>
+          </li>}
+
+           {user &&  <li>
+          <button onClick={handleLogout}>Log out</button> 
+          </li>}
         </ul>
       </nav>
     </header>
