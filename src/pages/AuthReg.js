@@ -21,7 +21,7 @@ const AuthRegPage = () => {
           token: user.accessToken,
         }));
 
-        navigate('/', {
+        navigate('/0', {
           replace: true,
         })
        }

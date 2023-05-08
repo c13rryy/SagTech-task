@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut  } from "firebase/auth";
 
 import toast from 'react-hot-toast';
@@ -45,6 +46,29 @@ const firebaseConfig = {
         toast.error(error.message)
      }
   }
+
+
+
+  const db = getFirestore(app);
+  const tasksRef = collection(db, "tasks");
+
+ export async function addTask(task) {
+   try {
+     const docRef = await addDoc(tasksRef, task);
+     console.log("Document written with ID: ", docRef.id);
+   } catch (error) {
+     console.error("Error adding document: ", error);
+   }
+ }
+
+ export async function getData() {
+   const snapshot = await getDocs(tasksRef); 
+   snapshot.forEach(doc => {
+      console.log(doc.id, '=>', doc.data());
+    });
+
+ }
+ getData();
 
 
   export default app;

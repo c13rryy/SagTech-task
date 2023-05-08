@@ -25,7 +25,7 @@ const Navigation = () => {
   return (
     <header className={classes.header}>
       <div>
-        <Link className={classes.logo} to='/'>Tassker</Link>
+        <Link className={classes.logo} to='/0'>Tassker</Link>
       </div>
       <nav >
         <ul className={classes.list}>

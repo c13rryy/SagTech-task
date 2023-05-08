@@ -1,0 +1,40 @@
+.slideItem{
+    border: 1px solid gray;
+    border-radius: 8px;
+    width: 50px !important;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .slick-slide:first-child div:first-child .slideItem:first-child{
+    background-color: black;
+  }
+  
+  .slick-slide:first-child div:first-child .slideItem .dayWeek{
+    color: white;
+  }
+  
+  .slick-slide:first-child div:first-child .slideItem .dayNumber{
+    color: white;
+  }
+  
+  .dayWeek{
+    color: gray;
+    margin-top: 3px;
+  }
+  
+  .dayNumber{
+    margin-top: 6px;
+    margin-bottom: 6px;
+    color: black;
+  }
+
+  .active{
+    border: 3px solid gold;
+    border-radius: 8px;
+    width: 50px !important;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  

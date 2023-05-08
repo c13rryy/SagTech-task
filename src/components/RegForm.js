@@ -40,11 +40,11 @@ const RegForm = (props) => {
       <form onSubmit={page ? handleSubmitReg : handleSubmitLogin } className={classes.form}>
         <div>
           <label htmlFor="email">Email</label>
-          <input  value={email} id="email" type="email" name="email" onChange={e => setEmail(e.target.value)}  />
+          <input  value={email} id="email" type="email" name="email" autoComplete='current-password' onChange={e => setEmail(e.target.value)}  />
         </div>
         <div>
           <label htmlFor="image">Password</label>
-          <input value={password} id="password" type="password" name="password" onChange={e => setPassword(e.target.value)}  />
+          <input value={password} id="password" type="password" name="password" autoComplete='current-password' onChange={e => setPassword(e.target.value)}  />
         </div>
         <div className={classes.buttons}>
             <Link className={classes.signup} to={page ?'/login' : '/reg'}>{page ? 'Login in' : 'Registr'}</Link>

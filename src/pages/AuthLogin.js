@@ -17,7 +17,7 @@ const AuthLoginPage = () => {
          token: user.accessToken,
        }));
 
-       navigate('/', {
+       navigate('/0', {
          replace: true,
        })
       }
