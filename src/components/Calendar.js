@@ -44,7 +44,7 @@ const Calendar = () => {
   }, [da]);
 
   useEffect(() => {
-    if (da.length <= 15 && da.length > 0) {
+    if (da.length <= 25 && da.length > 0) {
       newDate();
     }
   }, [da, newDate]);

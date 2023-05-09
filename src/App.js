@@ -8,6 +8,8 @@ import Task from './pages/Task';
 import Add , {action as takeData } from './pages/Add';
 import Edit from './pages/Edit';
 
+import {loader as getLoader} from './firebase';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -17,6 +19,8 @@ const router = createBrowserRouter([
       {
          path: ':index',
           element: <Task /> ,
+          loader: getLoader,
+          id: 'task-data',
           children: [
             { path: 'add-task', element:<Add />, action:takeData},
             { path: 'edit-task', element:<Edit />}

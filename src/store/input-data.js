@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    email: null,
-    password: null
+    title: null,
+    info: null
 }
 
 const inputData = createSlice({
-    name:'data',
+    name:'task',
     initialState,
     reducers: {
         getData: (state, action) => {
-            state.email = action.payload.email;
-            state.password = action.payload.password;
+            state.title = action.payload.title;
+            state.info = action.payload.info;
         }
     }
 });

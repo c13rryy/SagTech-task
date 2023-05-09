@@ -6,6 +6,7 @@ import { redirect } from "react-router-dom";
 import { addTask } from "../firebase";
 
 
+
 const Add = () => {
     return (
        <>
@@ -17,6 +18,7 @@ const Add = () => {
 
 export default Add;
 
+
 export async function action({request}) {
 
 
@@ -25,6 +27,7 @@ export async function action({request}) {
   const eventData = {
     title: data.get('text-title'),
     info: data.get('text-info'),
+    id: Math.random()
 }
 
 addTask(eventData)

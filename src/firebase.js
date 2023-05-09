@@ -61,14 +61,17 @@ const firebaseConfig = {
    }
  }
 
- export async function getData() {
+ export async function loader() {
    const snapshot = await getDocs(tasksRef); 
-   snapshot.forEach(doc => {
-      console.log(doc.id, '=>', doc.data());
-    });
+   const tasks = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    return tasks;
 
  }
- getData();
+
 
 
   export default app;
