@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 
-import { getFirestore, collection, addDoc, getDocs,   query, where } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs,   query, where, doc, updateDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut  } from "firebase/auth";
 
 
@@ -73,6 +73,16 @@ const firebaseConfig = {
       ...doc.data()
    }));
    return tasks;
+}
+
+export async function updateTask(taskId, updTask){
+   try{
+      const taskDocRef = doc(db, "tasks", taskId);
+      await updateDoc(taskDocRef, updTask)
+      console.log("Document updated with ID: ", taskId);
+   } catch (error) {
+     console.error("Error updating document: ", error);
+   }
 }
    
 

@@ -8,7 +8,6 @@ import Task from './pages/Task';
 import Edit from './pages/Edit';
 import MoreTask from './pages/MoreTask';
 import Add from './pages/Add';
-import { Outlet } from 'react-router-dom';
 /* import {loader as getLoader} from './firebase'; */
 
 const router = createBrowserRouter([
@@ -18,22 +17,22 @@ const router = createBrowserRouter([
     children: [
       /*  */
       {
-         path: ':index',
-          element: <Outlet /> ,
-          /* loader: getLoader, */
-          id: 'task-data',
-          children: [
-            { index:true, element: <Task /> },
-            { path: 'add-task', element: <Add /> },
-            { 
-              path: ':id', 
-              element:<Outlet />, 
-              children: [
-                {index:true, element:<MoreTask/>},
+        path: ':index',
+        element: <Task />,
+        /* loader: getLoader, */
+        id: 'task-data',
+        children: [
+          { path: 'add-task', element: <Add /> },
+          {
+            path: ':id',
+            element: <MoreTask />,
+            children: [
               { path: 'edit-task', element:<Edit />},
-            ]},
-          ],
-        },
+            ]
+          },
+        ],
+        
+      },
 
       { path: 'login', element: <AuthLoginPage /> },
       { path: 'reg', element: <AuthRegPage /> },

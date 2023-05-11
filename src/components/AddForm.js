@@ -1,28 +1,43 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import classes from './AddForm.module.css';
 /* import { Form } from 'react-router-dom'; */
 
 import { addTask } from '../firebase';
 import { useSelector } from 'react-redux';
 
+import { updateTask } from '../firebase';
 
-const AddForm = () => {
+
+import PropTypes from "prop-types";
+
+
+const AddForm = ({some}) => {
   const {date} = useSelector(state => state.idTaker)
-  const [title, setTitle] = useState('');
+ /*  const [title, setTitle] = useState('');
 
-  const [text, setText] = useState('');
+  const [text, setText] = useState(''); */
 
+  const inputRef = useRef(null);
 
+  const textRef = useRef(null);
+
+  console.log(some)
   const submitHandler = async(e) => {
     e.preventDefault();
-
+   
      const data = {
-      title,
-      info: text,
+      title: inputRef.current.value,
+      info: textRef.current.value,
       date
      }
 
-     addTask(data);
+     if(some){
+      updateTask(some.id, data)
+     }else{
+      addTask(data);
+     }
+
+     
 
 
   }
@@ -36,8 +51,8 @@ const AddForm = () => {
             id="text-one"
             type="text"
             name="text-title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            ref={inputRef}
+            defaultValue={some ? some.title : ''}
           />
         </div>
 
@@ -48,8 +63,9 @@ const AddForm = () => {
             rows="10" cols="50"
             id="text-two"
             name="text-info"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
+            ref={textRef}
+            defaultValue={some ? some.info : ''}
+            
           />
         </div>
 
@@ -59,6 +75,14 @@ const AddForm = () => {
       </form>
     </section>
   );
+};
+
+AddForm.propTypes = {
+  some: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    info: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default AddForm;
