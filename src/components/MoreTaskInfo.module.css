@@ -1,0 +1,32 @@
+.gapSect{
+    padding: 50px;
+}
+
+.title{
+    text-align: center;
+    text-transform: uppercase;
+
+}
+
+.allInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+
+.txt{
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.tt{
+    text-align: center;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    gap: 15px;
+}

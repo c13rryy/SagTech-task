@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import { Outlet /* useRouteLoaderData */, useParams } from 'react-router-dom';
+import { Outlet /* useRouteLoaderData */,  useParams } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,17 +8,21 @@ import { getId } from '../store/idTaker';
 
 import { getData } from '../firebase';
 
+import { getAllInfo } from '../store/showData';
 
+import classes from '../pages/Task.module.css'
 
 import ShowTask from '../components/ShowTask';
 
 
 
 
+
 const Task = () => {
   const {date} = useSelector((state) => state.idTaker);
+  /* const {taskId} = useSelector((state) => state.idTaker); */
+  const  {information} = useSelector((state) => state.showData);
   const { user } = useSelector((state) => state.auth);
-  const [tasks, setTasks] = useState([]);
 
   const  {index} = useParams();
 
@@ -31,10 +35,12 @@ const Task = () => {
   useEffect(() => {
     const loadTasks = async () => {
       const loadedTasks = await getData(date);
-      setTasks(loadedTasks);
+      dispatch(getAllInfo(loadedTasks));
+      
     };
     loadTasks();
   }, [date]);
+ 
 
 
 
@@ -42,12 +48,13 @@ const Task = () => {
   const className = !user ? 'bg' : '';
   return (
     <React.Fragment>
-      <section className={className}>
-        <h1>Taskpage</h1>
+      <section  className={className}>
+        {user && <h1 className={classes.somegap}>Your Tasks</h1>}
         {!user && <p className="invalid">CONTENT INVALID</p>}
       </section>
-      <ShowTask info={tasks} />
-      <Outlet  />
+      
+      {user && <ShowTask info={information} />}
+     {user &&  <Outlet  />}
     </React.Fragment>
   );
 };

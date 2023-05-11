@@ -5,10 +5,10 @@ import AuthLoginPage from './pages/AuthLogin';
 import AuthRegPage from './pages/AuthReg';
 import { Toaster } from 'react-hot-toast';
 import Task from './pages/Task';
-import Add  /* {action as takeData } */ from './pages/Add';
 import Edit from './pages/Edit';
 import MoreTask from './pages/MoreTask';
-
+import Add from './pages/Add';
+import { Outlet } from 'react-router-dom';
 /* import {loader as getLoader} from './firebase'; */
 
 const router = createBrowserRouter([
@@ -19,16 +19,22 @@ const router = createBrowserRouter([
       /*  */
       {
          path: ':index',
-          element: <Task /> ,
+          element: <Outlet /> ,
           /* loader: getLoader, */
           id: 'task-data',
           children: [
-            { path: 'add-task', element:<Add />, /* action:takeData */},
-            { path: 'edit-task', element:<Edit />},
-            { path: 'more-info', element:<MoreTask />}
-
+            { index:true, element: <Task /> },
+            { path: 'add-task', element: <Add /> },
+            { 
+              path: ':id', 
+              element:<Outlet />, 
+              children: [
+                {index:true, element:<MoreTask/>},
+              { path: 'edit-task', element:<Edit />},
+            ]},
           ],
         },
+
       { path: 'login', element: <AuthLoginPage /> },
       { path: 'reg', element: <AuthRegPage /> },
     ],

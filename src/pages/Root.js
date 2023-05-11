@@ -7,9 +7,13 @@ import Calendar from "../components/Calendar";
 import { useSelector } from "react-redux";
 const RootLayout = () => {
    const { user } = useSelector((state) => state.auth);
+
+
+  
+
    return (
      <Fragment>
-        <Navigation />
+       <Navigation />
         <main>
         { user && <Calendar />}
         <Outlet />

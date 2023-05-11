@@ -5,19 +5,23 @@ import PropTypes from "prop-types";
 import classes from './ShowTask.module.css'
 import { Link } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+
 const ShowTask = (props) => {
+  const {date} = useSelector((state) => state.idTaker);
     return(
         <>
       <section className={classes.sectionTask}>
-        <ul>
+        <ul className={classes.list}>
        {props.info.map((doc) => (
-          <li key={doc.id
+          <li key={doc.id 
           } >
-              <Link to='more-info'>{doc.title}</Link>
+              <Link className={classes.href} to={`/${date}/${doc.id}`}>{doc.title}</Link>
           </li>
         ))}
 
       </ul>
+
       </section>
       </>
     )

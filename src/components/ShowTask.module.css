@@ -5,3 +5,27 @@
 .textInfo{
     text-align: center;
 }
+
+
+.href{
+    text-decoration: none;
+    color: black;
+    font-size:  35px;
+    cursor: pointer;
+    transition: 0.5s;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.href:hover{
+    color: gold;
+    transition: 0.5s;
+}
+
+.list{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+

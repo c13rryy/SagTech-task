@@ -22,6 +22,7 @@ const Navigation = () => {
     })
 }
 
+const {date} = useSelector((state) => state.idTaker);
   return (
     <header className={classes.header}>
       <div>
@@ -31,7 +32,11 @@ const Navigation = () => {
         <ul className={classes.list}>
           {!user && <li>
             <Link to='reg' className={classes.txt}>Auth</Link>
-            </li>}              
+            </li>}   
+
+            {user && <li>
+              <Link to={`/${date}/add-task`} className={classes.txt}>add task</Link>
+              </li>}           
 
 
            {user &&  <li>
