@@ -1,9 +1,9 @@
 import React  from "react";
 import AddForm from "../components/AddForm";
 
-import { redirect } from "react-router-dom";
+/* import { redirect } from "react-router-dom";
 
-import { addTask } from "../firebase";
+import { addTask } from "../firebase"; */
 
 
 
@@ -19,7 +19,7 @@ const Add = () => {
 export default Add;
 
 
-export async function action({request}) {
+/* export async function action({request}) {
 
 
     const data = await request.formData();
@@ -36,3 +36,4 @@ return redirect('..')
 
 }
 
+ */

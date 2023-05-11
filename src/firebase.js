@@ -1,9 +1,12 @@
 import { initializeApp } from "firebase/app";
 
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs,   query, where } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut  } from "firebase/auth";
 
+
+
 import toast from 'react-hot-toast';
+
 
 const firebaseConfig = {
    apiKey: process.env.REACT_APP_API_KEY,
@@ -61,17 +64,17 @@ const firebaseConfig = {
    }
  }
 
- export async function loader() {
-   const snapshot = await getDocs(tasksRef); 
+
+ export async function getData(date) {
+   const q = query(tasksRef, where("date", "==", date));
+  const snapshot = await getDocs(q);
    const tasks = snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
-    }));
-
-    return tasks;
-
- }
-
+   }));
+   return tasks;
+}
+   
 
 
   export default app;

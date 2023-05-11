@@ -33,9 +33,6 @@ const Navigation = () => {
             <Link to='reg' className={classes.txt}>Auth</Link>
             </li>}              
 
-           {user && <li>
-            <Link to='/' className={classes.txt}>Create task</Link>
-          </li>}
 
            {user &&  <li>
           <button onClick={handleLogout}>Log out</button> 

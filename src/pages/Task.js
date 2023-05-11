@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Outlet, useRouteLoaderData } from 'react-router-dom';
+import { Outlet /* useRouteLoaderData */, useParams } from 'react-router-dom';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getId } from '../store/idTaker';
+
+import { getData } from '../firebase';
 
 
 
@@ -10,15 +14,27 @@ import ShowTask from '../components/ShowTask';
 
 
 
+
 const Task = () => {
+  const {date} = useSelector((state) => state.idTaker);
   const { user } = useSelector((state) => state.auth);
+  const [tasks, setTasks] = useState([]);
 
+  const  {index} = useParams();
 
+  const dispatch = useDispatch();
 
-  const  data = useRouteLoaderData('task-data');
-  
+  useEffect(() => {
+    dispatch(getId(index));
+  }, [index])
 
-
+  useEffect(() => {
+    const loadTasks = async () => {
+      const loadedTasks = await getData(date);
+      setTasks(loadedTasks);
+    };
+    loadTasks();
+  }, [date]);
 
 
 
@@ -30,8 +46,8 @@ const Task = () => {
         <h1>Taskpage</h1>
         {!user && <p className="invalid">CONTENT INVALID</p>}
       </section>
-      <ShowTask info={data} />
-      <Outlet />
+      <ShowTask info={tasks} />
+      <Outlet  />
     </React.Fragment>
   );
 };
