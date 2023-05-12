@@ -15,11 +15,9 @@ const router = createBrowserRouter([
     path: '/',
     element: <RootLayout />,
     children: [
-      /*  */
       {
         path: ':index',
         element: <Task />,
-        /* loader: getLoader, */
         id: 'task-data',
         children: [
           { path: 'add-task', element: <Add /> },

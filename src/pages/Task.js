@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { Outlet /* useRouteLoaderData */,  useParams } from 'react-router-dom';
+import { Outlet /* useRouteLoaderData */,  useLocation,  useParams } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,10 +20,10 @@ import ShowTask from '../components/ShowTask';
 
 const Task = () => {
   const {date} = useSelector((state) => state.idTaker);
-  /* const {taskId} = useSelector((state) => state.idTaker); */
   const  {information} = useSelector((state) => state.showData);
   const { user } = useSelector((state) => state.auth);
 
+  const location = useLocation();
   const  {index} = useParams();
 
   const dispatch = useDispatch();
@@ -33,14 +33,15 @@ const Task = () => {
   }, [index])
 
   useEffect(() => {
+   if(location.pathname === `/${date}`){
     const loadTasks = async () => {
       const loadedTasks = await getData(date);
       dispatch(getAllInfo(loadedTasks));
       
     };
     loadTasks();
-  }, [date]);
-  
+   }
+  }, [date, location.pathname]);
 
 
 
@@ -53,7 +54,7 @@ const Task = () => {
         {!user && <p className="invalid">CONTENT INVALID</p>}
       </section>
       
-      {user && <ShowTask info={information} />}
+      {user && location.pathname === `/${date}` && <ShowTask info={information} />}
      {user &&  <Outlet  />}
     </React.Fragment>
   );

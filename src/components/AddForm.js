@@ -9,6 +9,7 @@ import { updateTask } from '../firebase';
 
 
 import PropTypes from "prop-types";
+import { useNavigate } from 'react-router-dom';
 
 
 const AddForm = ({some}) => {
@@ -17,11 +18,12 @@ const AddForm = ({some}) => {
 
   const [text, setText] = useState(''); */
 
+  const navigate = useNavigate();
+
   const inputRef = useRef(null);
 
   const textRef = useRef(null);
 
-  console.log(some)
   const submitHandler = async(e) => {
     e.preventDefault();
    
@@ -32,10 +34,21 @@ const AddForm = ({some}) => {
      }
 
      if(some){
-      updateTask(some.id, data)
+      updateTask(some.id, data);
+
+      navigate(`/${date}`, {
+        replace: true,
+      })
+      
      }else{
       addTask(data);
+      navigate(`/${date}`, {
+        replace: true,
+      })
      }
+
+
+
 
      
 
@@ -43,7 +56,7 @@ const AddForm = ({some}) => {
   }
   return (
     <section className={classes.sectionForm}>
-        <h1>Add Task</h1>
+        <h1>{some ? 'Edit Task' : 'Add Task'}</h1>
       <form  onSubmit={submitHandler} className={classes.form} >
         <div>
           <label htmlFor="text-title">Title</label>
@@ -70,7 +83,7 @@ const AddForm = ({some}) => {
         </div>
 
         <div className={classes.addButton}> 
-            <button>Add</button>
+            <button>{some ? "Edit" : "Add" }</button>
         </div>
       </form>
     </section>
@@ -82,7 +95,6 @@ AddForm.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
 };
-
 export default AddForm;
