@@ -29,3 +29,16 @@
     gap: 40px;
 }
 
+.listCheck{
+    display: flex;
+    align-items: center;
+}
+
+
+.check{
+    width: 25px;
+    height: 25px;
+    margin: 0px;
+    margin-left: 15px;
+    padding: 0px;
+}

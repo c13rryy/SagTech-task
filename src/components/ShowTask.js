@@ -4,19 +4,24 @@ import PropTypes from "prop-types";
 
 import classes from './ShowTask.module.css'
 import { Link } from "react-router-dom";
+import { checkBox } from "../store/idTaker";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const ShowTask = (props) => {
   const {date} = useSelector((state) => state.idTaker);
+  const {isChecked} = useSelector((state) => state.idTaker);
+  const dispatch = useDispatch();
     return(
         <>
       <section className={classes.sectionTask}>
         <ul className={classes.list}>
        {props.info.map((doc) => (
-          <li key={doc.id 
+          <li className={classes.listCheck} key={doc.id 
           } >
+              
               <Link className={classes.href} to={`/${date}/${doc.id}`}>{doc.title}</Link>
+              <input  className={classes.check} checked={isChecked.includes(doc.id)} onChange={() => dispatch(checkBox(doc.id))} type="checkbox" />
           </li>
         ))}
 

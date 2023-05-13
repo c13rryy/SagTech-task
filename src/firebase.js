@@ -75,6 +75,23 @@ const firebaseConfig = {
    return tasks;
 }
 
+export async function getDataTask() {
+   try{
+      const snapshot = await getDocs(tasksRef);
+      const tasks = [];
+      snapshot.forEach((doc) => {
+         tasks.push({
+            id: doc.id,
+            ...doc.data(),
+         });
+      });
+      return tasks
+   } catch(error){
+      console.log("ERRROR",error);
+      throw error;
+   }
+}
+
 export async function updateTask(taskId, updTask){
    try{
       const taskDocRef = doc(db, "tasks", taskId);

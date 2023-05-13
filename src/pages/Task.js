@@ -14,6 +14,10 @@ import classes from '../pages/Task.module.css'
 
 import ShowTask from '../components/ShowTask';
 
+import { infoForCalendar } from '../store/showData';
+
+import { getDataTask } from '../firebase';
+
 
 
 
@@ -43,6 +47,14 @@ const Task = () => {
    }
   }, [date, location.pathname]);
 
+  useEffect(() => {
+    const loadInf = async () => {
+      const loadedTasks = await getDataTask();
+      dispatch(infoForCalendar(loadedTasks));
+   }
+   loadInf();
+  }, []);
+
 
 
 
@@ -50,7 +62,7 @@ const Task = () => {
   return (
     <React.Fragment>
       <section  className={className}>
-        {user && <h1 className={classes.somegap}>Your Tasks</h1>}
+        {user && location.pathname === `/${date}` && <h1 className={classes.somegap}>Your Tasks</h1>}
         {!user && <p className="invalid">CONTENT INVALID</p>}
       </section>
       

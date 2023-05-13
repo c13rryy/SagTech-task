@@ -6,8 +6,69 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './Calendar.css';
 import { NavLink } from 'react-router-dom';
+import { cammon } from '../store/idTaker';
+import { diff } from '../store/idTaker';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Calendar = () => {
+  /* const {date} = useSelector((state) => state.idTaker); */
+/*   const [commonEl, setCommonEl] = useState([]);
+const [diffEll, setDiffEll] = useState([]); */
+
+  const dispatch = useDispatch();
+  const {date} = useSelector((state) => state.idTaker);
+  const numberDate = Number(date);
+  console.log(typeof(numberDate));
+  const {isChecked} = useSelector((state) => state.idTaker); 
+  const {allInfo} = useSelector((state) => state.showData );
+  const {cammonArray} = useSelector((state) => state.idTaker);
+  const {diffArray} = useSelector((state) => state.idTaker);
+
+  const idInfo = [];
+
+  for(let i = 0; i < allInfo.length; i++){
+    let obj = allInfo[i];
+    let id =  obj.id;
+
+    idInfo.push(id);
+  }
+
+
+  
+
+ useEffect(() => {
+  const allArrays = (idInfo, isChecked) => {
+    let commonEl = [];
+    let diffEll = [];
+    for(let i = 0; i < idInfo.length; i++){
+      if(isChecked.indexOf(idInfo[i]) !== -1){
+        commonEl.push(idInfo[i]);
+        commonEl.push(numberDate);
+      } else {
+        diffEll.push(idInfo[i]);
+        diffEll.push(date);
+      }
+    }
+
+    for(let x = 0; x < isChecked.length; x++){
+      if(idInfo.indexOf(isChecked[x]) === -1 ){
+        diffEll.push(isChecked[x]);
+        diffEll.push(date);
+      }
+    }
+
+    
+    dispatch(cammon(commonEl));
+    dispatch(diff(diffEll))
+      
+    
+  }
+  
+  allArrays(isChecked,idInfo);
+
+ },[isChecked]);
+
+
   const [da, setDays] = useState([]);
 
   const actDate = useCallback(() => {
@@ -49,6 +110,9 @@ const Calendar = () => {
     }
   }, [da, newDate]);
 
+
+
+
   const dayCells = da.map((day, index) => (
     <NavLink
       to={`/${index}`}
@@ -57,6 +121,8 @@ const Calendar = () => {
     >
       <div className="dayWeek">{day.format('ddd')}</div>
       <div className="dayNumber">{day.date()}</div>
+      { cammonArray.length !== 0 && cammonArray.includes(index) && <p>ready</p>}
+      { diffArray.includes(index) && <p>no ready</p>}
     </NavLink>
   ));
 
@@ -131,7 +197,7 @@ const Calendar = () => {
     ],
   };
 
-  return <Slider {...settings}>{dayCells}</Slider>;
+  return  <Slider {...settings}>{dayCells}</Slider>;
 };
 
 export default Calendar;

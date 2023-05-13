@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, {  useRef } from 'react';
 import classes from './AddForm.module.css';
 /* import { Form } from 'react-router-dom'; */
 
@@ -12,11 +12,14 @@ import PropTypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
 
 
+
+
 const AddForm = ({some}) => {
   const {date} = useSelector(state => state.idTaker)
  /*  const [title, setTitle] = useState('');
 
   const [text, setText] = useState(''); */
+
 
   const navigate = useNavigate();
 
@@ -49,11 +52,9 @@ const AddForm = ({some}) => {
 
 
 
-
-     
-
-
   }
+
+   
   return (
     <section className={classes.sectionForm}>
         <h1>{some ? 'Edit Task' : 'Add Task'}</h1>
