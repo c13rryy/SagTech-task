@@ -74,6 +74,7 @@
     position: absolute;
     right: 3%;
     top: 20%;
+    cursor: pointer;
 }
 
 .menu-enter {
