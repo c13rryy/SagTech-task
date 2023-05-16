@@ -30,3 +30,46 @@
     margin-top: 80px;
     gap: 15px;
 }
+
+.back{
+    background: none;
+    height: auto;
+    border: none;
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0px;
+}
+
+@media screen and (max-width:800px){
+    .txt{
+        font-size: 20px;
+    }
+
+    .tt{
+        font-size: 35px;
+    }
+
+    .gapSect{
+        padding: 25px;
+    }
+
+}
+
+@media screen and (max-width:600px){
+    .buttons{
+        flex-direction: column;
+    }
+
+    .gapSect{
+
+        padding-left: 15px;
+        padding-right: 15px;
+
+    }
+
+    .back{
+      width: auto;
+    }
+
+}

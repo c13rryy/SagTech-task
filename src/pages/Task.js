@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+ import React, { useEffect, useState } from 'react';
 
-import { Outlet /* useRouteLoaderData */,  useLocation,  useParams } from 'react-router-dom';
+import { Link ,Outlet ,  useLocation,  useParams } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,6 +18,9 @@ import { infoForCalendar } from '../store/showData';
 
 import { getDataTask } from '../firebase';
 
+import { CSSTransition } from 'react-transition-group';
+
+import 'animate.css';
 
 
 
@@ -26,11 +29,14 @@ const Task = () => {
   const {date} = useSelector((state) => state.idTaker);
   const  {information} = useSelector((state) => state.showData);
   const { user } = useSelector((state) => state.auth);
-
   const location = useLocation();
   const  {index} = useParams();
+  
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isReloading, setIsReloading] = useState(false);
 
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     dispatch(getId(index));
@@ -41,11 +47,15 @@ const Task = () => {
     const loadTasks = async () => {
       const loadedTasks = await getData(date);
       dispatch(getAllInfo(loadedTasks));
-      
+      setIsDataLoaded(true);
+      setIsReloading(true);
     };
     loadTasks();
    }
   }, [date, location.pathname]);
+
+
+   console.log(isReloading)
 
   useEffect(() => {
     const loadInf = async () => {
@@ -61,16 +71,32 @@ const Task = () => {
   const className = !user ? 'bg' : '';
   return (
     <React.Fragment>
+      <CSSTransition
+       in={isReloading}
+       timeout={500}
+       unmountOnExit
+       className="animate__animated animate__fadeIn"
+      >
+      <div> 
       <section  className={className}>
         {user && location.pathname === `/${date}` && <h1 className={classes.somegap}>Your Tasks</h1>}
         {!user && <p className="invalid">CONTENT INVALID</p>}
       </section>
       
       {user && location.pathname === `/${date}` && <ShowTask info={information} />}
+
+      {isDataLoaded && information.length === 0 && location.pathname === `/${date}` &&  <div className={classes.nobutt}>
+       <Link to={`/${date}/add-task`}> <button >Add Task</button></Link>
+      </div>}
      {user &&  <Outlet  />}
+      </div>
+      </CSSTransition>
+   
     </React.Fragment>
   );
 };
 
 export default Task;
+
+ 
 

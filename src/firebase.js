@@ -60,19 +60,23 @@ const firebaseConfig = {
      const docRef = await addDoc(tasksRef, task);
      console.log("Document written with ID: ", docRef.id);
    } catch (error) {
-     console.error("Error adding document: ", error);
+      toast.error(error.message);
    }
  }
 
 
  export async function getData(date) {
-   const q = query(tasksRef, where("date", "==", date));
+   try{
+      const q = query(tasksRef, where("date", "==", date));
   const snapshot = await getDocs(q);
    const tasks = snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
    }));
    return tasks;
+   } catch(error){
+      toast.error(error.message);
+   }
 }
 
 export async function getDataTask() {
@@ -87,8 +91,7 @@ export async function getDataTask() {
       });
       return tasks
    } catch(error){
-      console.log("ERRROR",error);
-      throw error;
+      toast.error(error.message);
    }
 }
 

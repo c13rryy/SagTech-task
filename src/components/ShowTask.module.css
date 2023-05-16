@@ -26,6 +26,7 @@
 .list{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 40px;
 }
 
@@ -42,3 +43,17 @@
     margin-left: 15px;
     padding: 0px;
 }
+
+@media screen and (max-width:1024px){
+   .sectionTask{
+    padding: 35px;
+   }
+}
+
+@media screen and (max-width:600px){
+    .href{
+        font-size: 25px;
+        font-weight: 500;
+    }
+ }
+ 

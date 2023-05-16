@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     information: [],
-    allInfo: []
+    allInfo: [],
+    router: null,
 };
 
 const showData = createSlice({
@@ -16,11 +17,15 @@ const showData = createSlice({
 
         infoForCalendar: (state, action) => {
             state.allInfo = action.payload
+        },
+
+        allRoutes: (state,action) => {
+            state.router = action.payload
         }
     }
 });
 
-export const { getAllInfo, infoForCalendar } = showData.actions;
+export const { getAllInfo, infoForCalendar, allRoutes } = showData.actions;
 
 export default showData.reducer;
 

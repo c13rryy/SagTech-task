@@ -1,47 +1,60 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    date : null,
-    taskId : null,
+    date: null,
+    taskId: null,
     isChecked: [],
-    cammonArray:[],
-    diffArray:[]
-}
-
-const idTaker = createSlice({
-    name:'id',
+    /*  cammonArray:[],
+      diffArray:[] */
+    taskStatus: {},
+  };
+  
+  const idTaker = createSlice({
+    name: 'id',
     initialState,
     reducers: {
-        getId: (state, action) => {
-            state.date = action.payload;
-            
-        },
+      getId: (state, action) => {
+        state.date = action.payload;
+      },
+  
+      getTaskID: (state, action) => {
+        state.taskId = action.taskId;
+      },
+  
 
-        getTaskID: (state, action) => {
-            state.taskId = action.taskId;
-            
-        },
-
-        checkBox: (state, action) => {
-            const taskId = action.payload;
-            const index = state.isChecked.indexOf(taskId);
-            if(index !== -1){
-                state.isChecked.splice(index, 1)
-            } else{
-                state.isChecked.push(taskId);
-            }
-        },
-
-        cammon: (state,action) => {
-            state.cammonArray = action.payload;
-        },
-
-        diff: (state, action) => {
-            state.diffArray = action.payload;
+      checkBox: (state, action) => {
+        const taskId = action.payload;
+        const date = state.date;
+        
+        // Update isChecked array
+        const index = state.isChecked.indexOf(taskId);
+        if (index !== -1) {
+          state.isChecked.splice(index, 1);
+        } else {
+          state.isChecked.push(taskId);
         }
-    }
-});
-
-export const { getId, getTaskID, checkBox, cammon, diff } = idTaker.actions;
-
-export default idTaker.reducer;
+        
+        // Update taskStatus object for the specific date
+        if (!state.taskStatus[date]) {
+          state.taskStatus[date] = [];
+        }
+        
+        const taskStatus = state.taskStatus[date];
+        const taskIdIndex = taskStatus.indexOf(taskId);
+        
+        if (taskIdIndex !== -1) {
+          taskStatus.splice(taskIdIndex, 1);
+        } else {
+          taskStatus.push(taskId);
+          taskStatus.sort(); // Sort the IDs within the object
+        }
+      },
+      
+      
+      
+      },
+  });
+  
+  export const { getId, getTaskID, checkBox, updateTaskStatus } = idTaker.actions;
+  
+  export default idTaker.reducer;

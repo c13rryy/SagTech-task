@@ -42,3 +42,75 @@
    color: rgb(228, 158, 28);
    transition: 0.5s;
 }
+
+.nav{
+    display: flex;
+
+}
+
+.butmenu{
+    width: 100px;
+    display: none;
+}
+
+.listwo{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.menu{
+    position: absolute;
+    width: 100%;
+    background-color: aqua;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    height: 60px;
+}
+
+.close{
+    position: absolute;
+    right: 3%;
+    top: 20%;
+}
+
+.menu-enter {
+    opacity: 0;
+  }
+  
+  .menu-enter-active {
+    opacity: 1;
+    transition: opacity 300ms;
+  }
+  
+  .menu-exit {
+    opacity: 1;
+  }
+  
+  .menu-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+
+@media screen and (max-width:1024px){
+    .header{
+        padding: 35px;
+    }
+
+    .butmenu{
+        display: block;
+    }
+
+    .list{
+        display: none;
+    }
+}
+
+@media screen and (max-width:600px){
+    .header{
+       padding-left: 15px;
+       padding-right: 15px;
+    }
+}

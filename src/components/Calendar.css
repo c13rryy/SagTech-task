@@ -1,27 +1,38 @@
-.slideItem{
+.swiper-initialized .swiper-wrapper .swiper-slide  {
     border: 1px solid gray;
     border-radius: 8px;
     width: 50px !important;
     text-align: center;
     text-decoration: none;
   }
-  
-  .slick-slide:first-child div:first-child .slideItem:first-child{
-    background-color: black;
-  }
-  
-  .slick-slide:first-child div:first-child .slideItem .dayWeek{
-    color: white;
-  }
-  
-  .slick-slide:first-child div:first-child .slideItem .dayNumber{
-    color: white;
-  }
+
   
   .dayWeek{
     color: gray;
     margin-top: 3px;
   }
+
+  .block-comp{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3px;
+  }
+
+  .completed{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: greenyellow;
+    
+  }
+
+  .notCompleted{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: black;
+  }
+  
   
   .dayNumber{
     margin-top: 6px;
@@ -36,5 +47,3 @@
     text-align: center;
     text-decoration: none;
   }
-
-  

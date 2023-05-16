@@ -1,4 +1,4 @@
-import React, {  useRef } from 'react';
+import React, {  useRef, useState } from 'react';
 import classes from './AddForm.module.css';
 /* import { Form } from 'react-router-dom'; */
 
@@ -19,6 +19,20 @@ const AddForm = ({some}) => {
  /*  const [title, setTitle] = useState('');
 
   const [text, setText] = useState(''); */
+
+  const [isInputFilled, setIsInputFilled] = useState(false);
+  const [isTextareaFilled, setIsTextareaFilled] = useState(false);
+
+  const handleInputChange = () => {
+    setIsInputFilled(inputRef.current.value !== '');
+  };
+
+  const handleTextareaChange = () => {
+    setIsTextareaFilled(textRef.current.value !== '');
+  };
+
+  const isButtonDisabled = some ? false :  !(isInputFilled && isTextareaFilled);
+
 
 
   const navigate = useNavigate();
@@ -54,10 +68,19 @@ const AddForm = ({some}) => {
 
   }
 
+
+  const goBack = () => {
+    navigate(`/${date}`, {
+      replace: true,
+    })
+  }
+
+
    
   return (
     <section className={classes.sectionForm}>
-        <h1>{some ? 'Edit Task' : 'Add Task'}</h1>
+      {!some &&  <div className={classes.goback}><button onClick={goBack} className={classes.back}>go back</button></div>}
+        <h1 className={classes.tag}>{some ? 'Edit Task' : 'Add Task'}</h1>
       <form  onSubmit={submitHandler} className={classes.form} >
         <div>
           <label htmlFor="text-title">Title</label>
@@ -67,6 +90,7 @@ const AddForm = ({some}) => {
             name="text-title"
             ref={inputRef}
             defaultValue={some ? some.title : ''}
+            onChange={handleInputChange}
           />
         </div>
 
@@ -79,12 +103,13 @@ const AddForm = ({some}) => {
             name="text-info"
             ref={textRef}
             defaultValue={some ? some.info : ''}
+            onChange={handleTextareaChange}
             
           />
         </div>
 
         <div className={classes.addButton}> 
-            <button>{some ? "Edit" : "Add" }</button>
+            <button disabled={isButtonDisabled}>{some ? "Edit" : "Add" }</button>
         </div>
       </form>
     </section>

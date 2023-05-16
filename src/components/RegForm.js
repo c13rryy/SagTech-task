@@ -36,7 +36,7 @@ const RegForm = (props) => {
   return (
     <React.Fragment>
       <section className={classes.sectionForm}>
-        <h1>{page ? 'reg' : 'lgoin' }</h1>
+        <h1>{page ? 'Regist' : 'Login' }</h1>
       <form onSubmit={page ? handleSubmitReg : handleSubmitLogin } className={classes.form}>
         <div>
           <label htmlFor="email">Email</label>

@@ -8,12 +8,17 @@ import Task from './pages/Task';
 import Edit from './pages/Edit';
 import MoreTask from './pages/MoreTask';
 import Add from './pages/Add';
-/* import {loader as getLoader} from './firebase'; */
+
+import './app.css';
+import ErrorPage from './pages/Error';
+
+
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
+    errorElement:<ErrorPage />,
     children: [
       {
         path: ':index',
@@ -37,6 +42,8 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
+
 function App() {
   return (
     <>

@@ -1,75 +1,37 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import moment from 'moment';
 import 'moment/locale/ru';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import './Calendar.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css'
 import { NavLink } from 'react-router-dom';
-import { cammon } from '../store/idTaker';
-import { diff } from '../store/idTaker';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+
 
 const Calendar = () => {
-  /* const {date} = useSelector((state) => state.idTaker); */
-/*   const [commonEl, setCommonEl] = useState([]);
-const [diffEll, setDiffEll] = useState([]); */
-
-  const dispatch = useDispatch();
-  const {date} = useSelector((state) => state.idTaker);
-  const numberDate = Number(date);
-  console.log(typeof(numberDate));
-  const {isChecked} = useSelector((state) => state.idTaker); 
-  const {allInfo} = useSelector((state) => state.showData );
-  const {cammonArray} = useSelector((state) => state.idTaker);
-  const {diffArray} = useSelector((state) => state.idTaker);
-
-  const idInfo = [];
-
-  for(let i = 0; i < allInfo.length; i++){
-    let obj = allInfo[i];
-    let id =  obj.id;
-
-    idInfo.push(id);
-  }
-
-
-  
-
- useEffect(() => {
-  const allArrays = (idInfo, isChecked) => {
-    let commonEl = [];
-    let diffEll = [];
-    for(let i = 0; i < idInfo.length; i++){
-      if(isChecked.indexOf(idInfo[i]) !== -1){
-        commonEl.push(idInfo[i]);
-        commonEl.push(numberDate);
-      } else {
-        diffEll.push(idInfo[i]);
-        diffEll.push(date);
-      }
-    }
-
-    for(let x = 0; x < isChecked.length; x++){
-      if(idInfo.indexOf(isChecked[x]) === -1 ){
-        diffEll.push(isChecked[x]);
-        diffEll.push(date);
-      }
-    }
-
-    
-    dispatch(cammon(commonEl));
-    dispatch(diff(diffEll))
-      
-    
-  }
-  
-  allArrays(isChecked,idInfo);
-
- },[isChecked]);
-
-
+  /*   const [isTaskAdded, setIsTaskAdded] = useState(false); */
   const [da, setDays] = useState([]);
+  const [completedDates, setCompletedDates] = useState([]);
+  /*  const [taskInfo, setTaskInfo] = useState(null); */
+  const { allInfo } = useSelector((state) => state.showData);
+  const { date } = useSelector((state) => state.idTaker);
+
+  const dayN = Number(date);
+
+  const { taskStatus } = useSelector((state) => state.idTaker);
+
+  const groupedTasks = {};
+
+  allInfo.forEach((task) => {
+    const { date, id } = task;
+
+    if (!groupedTasks[date]) {
+      groupedTasks[date] = [];
+    }
+
+    groupedTasks[date].push({ date, id });
+  });
+
+  console.log(groupedTasks[dayN]);
 
   const actDate = useCallback(() => {
     const currentMonth = moment();
@@ -110,94 +72,109 @@ const [diffEll, setDiffEll] = useState([]); */
     }
   }, [da, newDate]);
 
+  /*   useEffect(() => {
+    const tasks = allInfo.filter((task) => task.date === date);
+    setTaskInfo(tasks.length);
+  },[allInfo, date]);
+ */
 
+  useEffect(() => {
+    const completedTaskDates = Object.keys(taskStatus).filter(
+      (date) => taskStatus[date].length > 0
+    );
+    setCompletedDates(completedTaskDates);
+  }, [taskStatus]);
 
+  /*    
+useEffect(() => {
+    const whatDate = allInfo.map((obj) => obj.date);
+    const uniqArray = [...new Set(whatDate)];
+    const numericArr = uniqArray.map(str => parseInt(str));
+    setIsTaskAdded(numericArr)
+    
+  }, [allInfo]);
+ */
 
-  const dayCells = da.map((day, index) => (
-    <NavLink
-      to={`/${index}`}
-      className={({ isActive }) => (isActive ? 'active' : 'slideItem')}
-      key={index}
-    >
-      <div className="dayWeek">{day.format('ddd')}</div>
-      <div className="dayNumber">{day.date()}</div>
-      { cammonArray.length !== 0 && cammonArray.includes(index) && <p>ready</p>}
-      { diffArray.includes(index) && <p>no ready</p>}
-    </NavLink>
-  ));
+  const dayCells = da.map((day, index) => {
+    const isCompleted = completedDates.includes(String(index));
+    const tasksForDate = groupedTasks[index] || [];
+    const areAllTasksCompleted =
+      tasksForDate.length > 0 &&
+      tasksForDate.every((task) => taskStatus[task.id]);
+
+    return (
+      <SwiperSlide className="swiper-slide" key={index}>
+        <NavLink
+          to={`/${index}`}
+          className={({ isActive }) => (isActive ? 'active' : 'slideItem')}
+          key={index}
+        >
+          <div className="dayWeek">{day.format('ddd')}</div>
+          <div className="dayNumber">{day.date()}</div>
+          <div>
+            {isCompleted && (
+              <div className="block-comp">
+                <span className="completed"></span>
+              </div>
+            )}
+            {!isCompleted &&
+              tasksForDate.length > 0 &&
+              !areAllTasksCompleted && (
+                <div className="block-comp">
+                  <span className="notCompleted"></span>
+                </div>
+              )}
+          </div>
+        </NavLink>
+      </SwiperSlide>
+    );
+  });
 
   const settings = {
-    dots: false,
-    infinite: false,
-    draggable: true,
-    speed: 500,
-    slidesToShow: 23.5,
-    slidesToScroll: 10,
-    autoplay: false,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1600,
-        settings: {
-          slidesToShow: 23.5,
-        },
+    slidesPerView: 23.5,
+    navigation: true,
+    breakpoints: {
+      1500: {
+        slidesPerView: 23.5,
       },
-      {
-        breakpoint: 1550,
-        settings: {
-          slidesToShow: 19.4,
-        },
+      1280: {
+        slidesPerView: 20.5,
+      },
+      1140: {
+        slidesPerView: 18.5,
       },
 
-      {
-        breakpoint: 1300,
-        settings: {
-          slidesToShow: 16.2,
-        },
+      1024:{
+        slidesPerView: 16.5
       },
 
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 13.5,
-        },
+      900:{
+        slidesPerView: 14.5
+      },
+      775:{
+        slidesPerView: 12.5
       },
 
-      {
-        breakpoint: 840,
-        settings: {
-          slidesToShow: 10.8,
-          slidesToScroll: 5,
-        },
+      600:{
+        slidesPerView: 10.5
       },
 
-      {
-        breakpoint: 680,
-        settings: {
-          slidesToShow: 9.5,
-          slidesToScroll: 5,
-        },
+      515:{
+        slidesPerView: 8.5
       },
 
-      {
-        breakpoint: 580,
-        settings: {
-          slidesToShow: 7.3,
-          slidesToScroll: 3,
-        },
+      414:{
+        slidesPerView: 6.5
       },
 
-      {
-        breakpoint: 444,
-        settings: {
-          slidesToShow: 5.7,
-          slidesToScroll: 3,
-        },
-      },
-    ],
+      300:{
+        slidesPerView: 5.5
+      }
+
+    },
   };
 
-  return  <Slider {...settings}>{dayCells}</Slider>;
+  return <Swiper {...settings} >{dayCells}</Swiper>;
 };
 
 export default Calendar;
