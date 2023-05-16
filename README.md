@@ -3,7 +3,7 @@
 # How to run the app
 
 # Task
-* [url](https://.com/c13rryy](https://github.com/c13rryy/SagTech-task/edit/main/README.md)
+* [url](https://github.com/c13rryy/SagTech-task/edit/main/README.md)
 
 ***********
 
