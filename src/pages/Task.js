@@ -18,9 +18,10 @@ import { infoForCalendar } from '../store/showData';
 
 import { getDataTask } from '../firebase';
 
-import { CSSTransition } from 'react-transition-group';
+/* import { CSSTransition } from 'react-transition-group';
 
-import 'animate.css';
+import 'animate.css'; */
+import AnimatedPage from './Animated';
 
 
 
@@ -45,6 +46,7 @@ const Task = () => {
   useEffect(() => {
    if(location.pathname === `/${date}`){
     const loadTasks = async () => {
+      setIsDataLoaded(false);
       const loadedTasks = await getData(date);
       dispatch(getAllInfo(loadedTasks));
       setIsDataLoaded(true);
@@ -71,27 +73,22 @@ const Task = () => {
   const className = !user ? 'bg' : '';
   return (
     <React.Fragment>
-      <CSSTransition
-       in={isReloading}
-       timeout={500}
-       unmountOnExit
-       className="animate__animated animate__fadeIn"
-      >
+      <AnimatedPage>
       <div> 
       <section  className={className}>
         {user && location.pathname === `/${date}` && <h1 className={classes.somegap}>Your Tasks</h1>}
         {!user && <p className="invalid">CONTENT INVALID</p>}
       </section>
       
-      {user && location.pathname === `/${date}` && <ShowTask info={information} />}
+      {user && location.pathname === `/${date}` && isDataLoaded && <ShowTask info={information} />}
 
       {isDataLoaded && information.length === 0 && location.pathname === `/${date}` &&  <div className={classes.nobutt}>
        <Link to={`/${date}/add-task`}> <button >Add Task</button></Link>
       </div>}
      {user &&  <Outlet  />}
       </div>
-      </CSSTransition>
-   
+    
+      </AnimatedPage>
     </React.Fragment>
   );
 };

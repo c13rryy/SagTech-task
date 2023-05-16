@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css'
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import AnimatedPage from '../pages/Animated';
 
 
 const Calendar = () => {
@@ -174,7 +175,13 @@ useEffect(() => {
     },
   };
 
-  return <Swiper {...settings} >{dayCells}</Swiper>;
+  return (
+    <>
+    <AnimatedPage>
+    <Swiper {...settings} >{dayCells}</Swiper>
+    </AnimatedPage>
+    </>
+  );
 };
 
 export default Calendar;

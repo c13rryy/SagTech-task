@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { checkBox } from "../store/idTaker";
 
 import { useDispatch, useSelector } from "react-redux";
+import AnimatedPage from "../pages/Animated";
 
 const ShowTask = (props) => {
   const {date} = useSelector((state) => state.idTaker);
@@ -14,7 +15,8 @@ const ShowTask = (props) => {
   const dispatch = useDispatch();
     return(
         <>
-      <section className={classes.sectionTask}>
+        <AnimatedPage>
+        <section className={classes.sectionTask}>
         <ul className={classes.list}>
        {props.info.map((doc) => (
           <li className={classes.listCheck} key={doc.id 
@@ -28,6 +30,7 @@ const ShowTask = (props) => {
       </ul>
 
       </section>
+        </AnimatedPage>
       </>
     )
 }
