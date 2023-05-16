@@ -2,8 +2,8 @@
 
 # How to run the app
 
-#Task
-* [url]([https://.com/c13rryy](https://github.com/c13rryy/SagTech-task/edit/main/README.md))
+# Task
+* [url](https://.com/c13rryy](https://github.com/c13rryy/SagTech-task/edit/main/README.md)
 
 ***********
 
@@ -15,10 +15,15 @@
 * react-transition-group
 
 ***********
-#Application stack
+# Application stack
 
-##npm i:
+## npm i:
 * react-hot-toast - for mistakes
 * swiper - slide for calendar
 * moment - date/mont/years for calendar
 * firebase - data base
+
+***********
+
+## Database snapsho
+* [show](https://github.com/c13rryy/SagTech-task/blob/main/assets/Screenshot_17.png)
