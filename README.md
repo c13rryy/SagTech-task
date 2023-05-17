@@ -22,6 +22,7 @@
 * swiper - slide for calendar
 * moment - date/mont/years for calendar
 * firebase - data base
+* framer-motion
 
 ***********
 
