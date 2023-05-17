@@ -65,7 +65,7 @@ const {date} = useSelector((state) => state.idTaker);
 
 
            {user &&  <li>
-          <button onClick={handleLogout}>Log out</button> 
+          <button  className={classes.butlog} onClick={handleLogout}>Log out</button> 
           </li>}
         </ul>
           <div className={classes.close} onClick={toogleHandle}>close</div>
