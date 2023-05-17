@@ -31,7 +31,7 @@ const AddForm = ({some}) => {
     setIsTextareaFilled(textRef.current.value !== '');
   };
 
-  const isButtonDisabled = some ? false :  !(isInputFilled && isTextareaFilled);
+  const isButtonDisabled =  !(isInputFilled && isTextareaFilled);
 
 
 
