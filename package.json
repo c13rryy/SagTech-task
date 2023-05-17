@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",
     "animate.css": "^4.1.1",
+    "build": "^0.1.4",
     "firebase": "^9.21.0",
     "framer-motion": "^10.12.12",
     "moment": "^2.29.4",

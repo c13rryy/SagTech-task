@@ -9,10 +9,8 @@ import AnimatedPage from '../pages/Animated';
 
 
 const Calendar = () => {
-  /*   const [isTaskAdded, setIsTaskAdded] = useState(false); */
   const [da, setDays] = useState([]);
   const [completedDates, setCompletedDates] = useState([]);
-  /*  const [taskInfo, setTaskInfo] = useState(null); */
   const { allInfo } = useSelector((state) => state.showData);
   const { date } = useSelector((state) => state.idTaker);
 
@@ -73,11 +71,6 @@ const Calendar = () => {
     }
   }, [da, newDate]);
 
-  /*   useEffect(() => {
-    const tasks = allInfo.filter((task) => task.date === date);
-    setTaskInfo(tasks.length);
-  },[allInfo, date]);
- */
 
   useEffect(() => {
     const completedTaskDates = Object.keys(taskStatus).filter(
@@ -86,15 +79,7 @@ const Calendar = () => {
     setCompletedDates(completedTaskDates);
   }, [taskStatus]);
 
-  /*    
-useEffect(() => {
-    const whatDate = allInfo.map((obj) => obj.date);
-    const uniqArray = [...new Set(whatDate)];
-    const numericArr = uniqArray.map(str => parseInt(str));
-    setIsTaskAdded(numericArr)
-    
-  }, [allInfo]);
- */
+
 
   const dayCells = da.map((day, index) => {
     const isCompleted = completedDates.includes(String(index));
