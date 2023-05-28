@@ -1,5 +1,5 @@
 .sectionTask{
-    padding: 50px;
+    margin-top: 50px;
 }
 
 .textInfo{
@@ -46,10 +46,13 @@
 }
 
 @media screen and (max-width:1024px){
-   .sectionTask{
-    padding: 35px;
-   }
-}
+    .sectionTask{
+        margin-top: 35px;
+    }
+ }
+ 
+
+
 
 @media screen and (max-width:600px){
     .href{

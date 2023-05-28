@@ -2,19 +2,16 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import auth from "./auth";
 
-import idTaker from "./idTaker";
+import taskSlice from "./taskSlice";
 
-
-import showData from "./showData";
-
+import information from "./information";
 
 const store = configureStore({
-    reducer: {
-       auth,
-       idTaker, 
-       showData
-    }
-})
+  reducer: {
+    auth,
+    taskSlice,
+    information,
+  },
+});
 
 export default store;
-

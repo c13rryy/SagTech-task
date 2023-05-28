@@ -1,35 +1,38 @@
-import React, { useEffect } from 'react';
-import MoreTaskInfo from '../components/MoreTaskInfo';
+import React, { useCallback, useEffect } from "react";
+import MoreTaskInfo from "../components/InfoAboutTask/MoreTaskInfo";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useParams } from 'react-router-dom';
-import { getDataTask } from '../firebase';
-import { getTaskID } from '../store/idTaker';
-import { getAllInfo } from '../store/showData';
+import { Outlet, useParams } from "react-router-dom";
+import { getDataTask } from "../providers/tasks/tasks";
+import { getTaskID } from "../store/taskSlice";
+import { getAllInfo } from "../store/information";
+import { useMemo } from "react";
 const MoreTask = () => {
+  const loadTasks = useCallback(async () => {
+    const loadedTasks = await getDataTask();
+    dispatch(getAllInfo(loadedTasks));
+  }, []);
 
   useEffect(() => {
-     const loadTasks = async () => {
-       const loadedTasks = await getDataTask();
-       dispatch(getAllInfo(loadedTasks));
-    }
     loadTasks();
-   }, []);
-  const {information} = useSelector(state => state.showData);
-  const {id} = useParams();
+  }, []);
 
+  const { information } = useSelector((state) => state.information);
+  const { id } = useParams();
 
-  
   const dispatch = useDispatch();
 
-  const taskInfo = information.find(task => task.id === id);
-
-  useEffect(() =>{
-     dispatch(getTaskID(id));
+  useEffect(() => {
+    dispatch(getTaskID(id));
   }, [id]);
+
+  const infoAboutTask = useMemo(() => {
+    const taskInfo = information.find((task) => task.id === id);
+    return taskInfo;
+  }, [information]);
 
   return (
     <>
-      {taskInfo && <MoreTaskInfo inf={taskInfo} />}
+      {infoAboutTask && <MoreTaskInfo inf={infoAboutTask} />}
       <Outlet />
     </>
   );

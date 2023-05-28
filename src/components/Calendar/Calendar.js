@@ -1,42 +1,42 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import moment from 'moment';
-import 'moment/locale/ru';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css'
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import AnimatedPage from '../pages/Animated';
-
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import moment from "moment";
+import "moment/locale/ru";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import AnimatedPage from "../../pages/Animated";
+import { actulDates } from "../../store/taskSlice";
+import "./Calendar.css";
 
 const Calendar = () => {
   const [da, setDays] = useState([]);
   const [completedDates, setCompletedDates] = useState([]);
-  const { allInfo } = useSelector((state) => state.showData);
-  const { date } = useSelector((state) => state.idTaker);
+  const { allInfo } = useSelector((state) => state.information);
+  const newInf = useMemo(() => allInfo, [allInfo]);
+  const { taskStatus } = useSelector((state) => state.taskSlice);
 
-  const dayN = Number(date);
+  const dispatch = useDispatch((state) => state.taskSlice);
+  const groupedTasks = useMemo(() => {
+    const groupedTasks = {};
 
-  const { taskStatus } = useSelector((state) => state.idTaker);
+    newInf.forEach((task) => {
+      const { correctDate, id, date } = task;
 
-  const groupedTasks = {};
+      if (!groupedTasks[correctDate]) {
+        groupedTasks[correctDate] = [];
+      }
 
-  allInfo.forEach((task) => {
-    const { date, id } = task;
-
-    if (!groupedTasks[date]) {
-      groupedTasks[date] = [];
-    }
-
-    groupedTasks[date].push({ date, id });
-  });
-
-  console.log(groupedTasks[dayN]);
+      groupedTasks[correctDate].push({ date, id, correctDate });
+    });
+    return groupedTasks;
+  }, [newInf]);
 
   const actDate = useCallback(() => {
     const currentMonth = moment();
     const daysInMonth = currentMonth.daysInMonth();
     const now = moment();
-    const day = now.format('D');
+    const day = now.format("D");
 
     const days = [];
     for (let i = day; i <= daysInMonth; i++) {
@@ -54,7 +54,7 @@ const Calendar = () => {
   const newDate = useCallback(() => {
     const currentMonthNew = moment();
 
-    const nextMonth = currentMonthNew.clone().add(1, 'month');
+    const nextMonth = currentMonthNew.clone().add(1, "month");
     const daysInMonth = nextMonth.daysInMonth();
     const nextDays = [];
     for (let i = 1; i <= daysInMonth; i++) {
@@ -71,7 +71,6 @@ const Calendar = () => {
     }
   }, [da, newDate]);
 
-
   useEffect(() => {
     const completedTaskDates = Object.keys(taskStatus).filter(
       (date) => taskStatus[date].length > 0
@@ -79,11 +78,21 @@ const Calendar = () => {
     setCompletedDates(completedTaskDates);
   }, [taskStatus]);
 
+  useEffect(() => {
+    const fullDates = da.map((momentObj) => {
+      const day = momentObj.date().toString().padStart(2, "0");
+      const month = String(momentObj.month() + 1).padStart(2, "0");
+      const year = momentObj.year();
 
+      return `${day}-${month}-${year}`;
+    });
+
+    dispatch(actulDates(fullDates));
+  }, [actDate, newDate]);
 
   const dayCells = da.map((day, index) => {
-    const isCompleted = completedDates.includes(String(index));
-    const tasksForDate = groupedTasks[index] || [];
+    const isCompleted = completedDates.includes(day.format("DD-MM-YYYY"));
+    const tasksForDate = groupedTasks[day.format("DD-MM-YYYY")] || [];
     const areAllTasksCompleted =
       tasksForDate.length > 0 &&
       tasksForDate.every((task) => taskStatus[task.id]);
@@ -92,10 +101,10 @@ const Calendar = () => {
       <SwiperSlide className="swiper-slide" key={index}>
         <NavLink
           to={`/${index}`}
-          className={({ isActive }) => (isActive ? 'active' : 'slideItem')}
+          className={({ isActive }) => (isActive ? "active" : "slideItem")}
           key={index}
         >
-          <div className="dayWeek">{day.format('ddd')}</div>
+          <div className="dayWeek">{day.format("ddd")}</div>
           <div className="dayNumber">{day.date()}</div>
           <div>
             {isCompleted && (
@@ -130,41 +139,40 @@ const Calendar = () => {
         slidesPerView: 18.5,
       },
 
-      1024:{
-        slidesPerView: 16.5
+      1024: {
+        slidesPerView: 16.5,
       },
 
-      900:{
-        slidesPerView: 14.5
+      900: {
+        slidesPerView: 14.5,
       },
-      775:{
-        slidesPerView: 12.5
-      },
-
-      600:{
-        slidesPerView: 10.5
+      775: {
+        slidesPerView: 12.5,
       },
 
-      515:{
-        slidesPerView: 8.5
+      600: {
+        slidesPerView: 10.5,
       },
 
-      414:{
-        slidesPerView: 6.5
+      515: {
+        slidesPerView: 8.5,
       },
 
-      300:{
-        slidesPerView: 5.5
-      }
+      414: {
+        slidesPerView: 6.5,
+      },
 
+      300: {
+        slidesPerView: 5.5,
+      },
     },
   };
 
   return (
     <>
-    <AnimatedPage>
-    <Swiper {...settings} >{dayCells}</Swiper>
-    </AnimatedPage>
+      <AnimatedPage>
+        <Swiper {...settings}>{dayCells}</Swiper>
+      </AnimatedPage>
     </>
   );
 };

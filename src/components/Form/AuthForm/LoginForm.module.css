@@ -14,7 +14,7 @@ h1{
 }
 
 
-input{
+/* input{
     width: 100%;
     border: 1px solid black;
     outline: none;
@@ -24,7 +24,7 @@ input{
     margin-top: 5px;
     font-weight: 500;
 }
-
+ */
 
 label {
     font-weight: 600;
@@ -38,22 +38,7 @@ label {
   text-align: end;
 }
 
-button{
-    border: none;
-    height: 50px;
-    background-color: black;
-    color: white;
-    border-radius: 5px;
-    font-weight: 500;
-    padding-left: 25px;
-    padding-right: 25px;
-    cursor: pointer;
-}
 
-button:disabled{
-    background-color: gray;
-    color: black;
-}
 
 .signup{
     margin-right: 20px;
@@ -67,10 +52,6 @@ button:disabled{
         width: 100%;
     }
 
-    .sectionForm{
-        padding-left: 20px;
-        padding-right: 20px;
-    }
 
     button{
         width: 100%;

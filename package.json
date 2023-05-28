@@ -4,11 +4,7 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/user-event": "^12.5.0",
     "animate.css": "^4.1.1",
-    "build": "^0.1.4",
     "firebase": "^9.21.0",
     "framer-motion": "^10.12.12",
     "moment": "^2.29.4",
@@ -29,8 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint .",
-    "prettier": "prettier --write ."
+    "lint": "eslint ."
   },
   "eslintConfig": {
     "extends": [
@@ -51,12 +46,13 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.5.0",
     "eslint": "^8.39.0",
-    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-react": "^7.32.2",
-    "husky": "^8.0.3",
-    "prettier": "^2.8.8"
+    "husky": "^8.0.3"
   },
   "husky": {
     "hooks": {

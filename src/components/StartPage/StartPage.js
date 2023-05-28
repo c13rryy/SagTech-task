@@ -5,7 +5,8 @@ import classes from './StartPage.module.css';
 
 const StartPage = () => {
     const {user} = useSelector(state => state.auth);
-    const {date} = useSelector(state => state.idTaker)
+    console.log(user)
+    const {date} = useSelector(state => state.taskSlice)
     return(
         <>
         <section className={classes.allPage}>

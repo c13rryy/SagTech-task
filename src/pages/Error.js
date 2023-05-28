@@ -1,21 +1,22 @@
-
-import Navigation from "../components/Navigation";
+import Navigation from "../components/HeaderNavigation/Navigation";
 import React from "react";
-import PageContent from "../components/PageContent";
+import PageContent from "../components/TextForErrors/PageContent";
+import Wrapper from "../UI/Wrapper";
 
 const ErrorPage = () => {
-   /*  const error = useRouteError(); */
-    let title = "An error occured !";
+  let title = "An error occured !";
   let message = "Smth went wrong";
 
-  return(
+  return (
     <>
-    <Navigation />
-    <PageContent title={title}>
-        <p>{message}</p>
-      </PageContent>
+      <Wrapper>
+        <Navigation />
+        <PageContent title={title}>
+          <p>{message}</p>
+        </PageContent>
+      </Wrapper>
     </>
-  )
+  );
 };
 
 export default ErrorPage;

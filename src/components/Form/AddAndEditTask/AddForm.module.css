@@ -45,21 +45,8 @@
         width: 100%;
     }
 
-    .sectionForm{
-        padding-left: 20px;
-        padding-right: 20px;
-    }
 
     .tag{
         font-size: 35px;
     }
-}
-
-
-@media screen and (max-width:800px){
-    .sectionForm{
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-
 }
