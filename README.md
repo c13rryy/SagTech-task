@@ -26,5 +26,5 @@
 
 ***********
 
-## Database snapsho
+## Database snapshot
 * [show](https://github.com/c13rryy/SagTech-task/blob/main/assets/Screenshot_17.png)
