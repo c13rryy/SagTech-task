@@ -4,6 +4,7 @@ import PageContent from "../components/TextForErrors/PageContent";
 import Wrapper from "../UI/Wrapper";
 
 const ErrorPage = () => {
+  // TODO: let -> const
   let title = "An error occured !";
   let message = "Smth went wrong";
 

@@ -93,6 +93,8 @@ const Task = () => {
   }, []); 
 
   const className = !user ? "bg" : "";
+
+  // TODO: то же самое, можно мемоизировать
   return (
     <React.Fragment>
       <AnimatedPage>

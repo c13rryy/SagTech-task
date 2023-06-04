@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import classes from './Input.module.css';
 const Input = React.forwardRef((props,ref) => {
 
+  // TODO: странный форматинг(установи себе eslint pluggin в vscode) и prettier в еслинт конфигурацию, чтобы пофиксить
+  // TODO: {...props} 
     return (
         <input  className={`${classes.inputs} ${props.className}`}
         type={props.type || 'text'}
