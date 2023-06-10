@@ -14,6 +14,7 @@ import Input from "../../../UI/InputUI/Input";
 import { infoForCalendar } from "../../../store/information";
 
 const AddForm = ({ some }) => {
+  // TODO: рефы использовать плохо, перепиши все формы с react-hook-forms lib
   const dispatch = useDispatch();
   const { date } = useSelector((state) => state.taskSlice);
 

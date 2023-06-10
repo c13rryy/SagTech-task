@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import '../StylesUI/StylesUI.css'
 const Button = (props) => {
+  // TODO: можно сделать {...props} внутри компонента button, чтобы все проперти можно было передавать
   return (
    <div className={'buttonLoc'}>
      <button 

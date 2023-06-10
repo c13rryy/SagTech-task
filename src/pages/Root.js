@@ -21,6 +21,8 @@ const RootLayout = () => {
     }
   }, [date, location.pathname, newUser]);
 
+  // TODO: location pathname logic я бы обернул в useMemo
+
   return (
     <Fragment>
       {location.pathname === `/${date}` && <Navigation />}

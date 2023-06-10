@@ -13,6 +13,7 @@ const Calendar = () => {
   const [da, setDays] = useState([]);
   const [completedDates, setCompletedDates] = useState([]);
   const { allInfo } = useSelector((state) => state.information);
+  //  TODO: лишнее юз мемо, отрабатывает за тебя селектор тут
   const newInf = useMemo(() => allInfo, [allInfo]);
   const { taskStatus } = useSelector((state) => state.taskSlice);
 
@@ -90,6 +91,7 @@ const Calendar = () => {
     dispatch(actulDates(fullDates));
   }, [actDate, newDate]);
 
+  // TODO: мапь внтури memo
   const dayCells = da.map((day, index) => {
     const isCompleted = completedDates.includes(day.format("DD-MM-YYYY"));
     const tasksForDate = groupedTasks[day.format("DD-MM-YYYY")] || [];
@@ -125,6 +127,7 @@ const Calendar = () => {
     );
   });
 
+  // TODO: за пределы компонента
   const settings = {
     slidesPerView: 23.5,
     navigation: true,

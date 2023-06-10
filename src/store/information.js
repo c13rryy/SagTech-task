@@ -5,6 +5,7 @@ const initialState = {
   allInfo: [],
 };
 
+// TODO: name show поменяй
 const information = createSlice({
   name: "show",
   initialState,

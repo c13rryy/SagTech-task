@@ -91,7 +91,13 @@ const Task = () => {
     };
   }, []);
 
+<<<<<<< HEAD
 /*   const className = !user ? "bg" : ""; */
+=======
+  const className = !user ? "bg" : "";
+
+  // TODO: то же самое, можно мемоизировать
+>>>>>>> 1816760a0fd9aba77dc8dfa13bfff9a30a36d4d3
   return (
     <React.Fragment>
       <AnimatedPage>

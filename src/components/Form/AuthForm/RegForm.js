@@ -6,6 +6,7 @@ import Button from "../../../UI/ButtonUI/Button";
 import Wrapper from "../../../UI/WrapperUI/Wrapper";
 import Input from "../../../UI/InputUI/Input";
 
+// TODO: mismatch названий
 const RegForm = (props) => {
   const location = useLocation();
   const page = location.pathname === "/reg";
