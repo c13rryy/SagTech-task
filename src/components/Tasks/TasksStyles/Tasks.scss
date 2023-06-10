@@ -1,0 +1,119 @@
+@import "../../../StyleGlobal/Style.scss";
+
+@mixin onlylarge($w) {
+  @media only screen and (max-width: $w) {
+    @content;
+  }
+}
+
+.sectionTask {
+  margin-top: 50px;
+
+  @include onlylarge(1024px) {
+    margin-top: 35px;
+  }
+
+  h1 {
+    @include title();
+    @include onlylarge(600px) {
+      font-size: 35px;
+    }
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+
+    .listCheck {
+      display: flex;
+      align-items: center;
+
+      .href {
+        text-decoration: none;
+        color: $blackcolor;
+        font-size: 35px;
+        cursor: pointer;
+        transition: 0.5s;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 600;
+
+        @include onlylarge(600px) {
+          font-size: 25px;
+          font-weight: 500;
+        }
+
+        &:hover {
+          color: $gold;
+          transition: 0.5s;
+        }
+      }
+
+      .check {
+        width: 25px;
+        height: 25px;
+        margin: 0px;
+        margin-left: 15px;
+        padding: 0px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.gapSect {
+  margin-top: 50px;
+  @include onlylarge(800px) {
+    margin-top: 25px;
+  }
+
+  .back {
+    background: none;
+    height: auto;
+    border: none;
+    color: $blackcolor;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0px;
+    @include onlylarge(600px) {
+      width: auto;
+    }
+  }
+  .allInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    .txt {
+      font-size: 25px;
+      font-weight: 500;
+      @include onlylarge(800px) {
+        font-size: 20px;
+      }
+    }
+
+    .tt {
+      text-align: center;
+      @include title();
+      margin-top: 10px;
+      @include onlylarge(800px) {
+        font-size: 35px;
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    gap: 15px;
+    @include onlylarge(600px) {
+      flex-direction: column;
+    }
+
+    .links {
+      text-decoration: none;
+    }
+  }
+}

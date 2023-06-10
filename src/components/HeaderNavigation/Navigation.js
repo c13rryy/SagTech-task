@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-import classes from "../HeaderNavigation/Navigation.module.css";
+import './NavigationStyles/Navigation.css';
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../providers/auth/auth";
 import { useDispatch, useSelector } from "react-redux";
 
 import { logout as logoutHandle } from "../../store/auth";
-import Wrapper from "../../UI/Wrapper";
-import Button from "../../UI/Button";
+import Wrapper from "../../UI/WrapperUI/Wrapper";
+import Button from "../../UI/ButtonUI/Button";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,25 +29,25 @@ const Navigation = () => {
   const { date } = useSelector((state) => state.taskSlice);
   return (
     <Wrapper>
-      <header className={classes.header}>
+      <header className={'header'}>
         <div>
-          <Link className={classes.logo} to="/0">
+          <Link className={'logo'} to="/0">
             Tassker
           </Link>
         </div>
-        <nav className={classes.nav}>
+        <nav className={'nav'}>
           {user && (
-            <ul className={classes.list}>
+            <ul className={'list'}>
               {!user && (
                 <li>
-                  <Link to="reg" className={classes.txt}>
+                  <Link to="reg" className={'txt'}>
                     Auth
                   </Link>
                 </li>
               )}
 
               <li>
-                <Link to={`/${date}/add-task`} className={classes.txt}>
+                <Link to={`/${date}/add-task`} className={'txt'}>
                   add task
                 </Link>
               </li>
@@ -59,38 +59,38 @@ const Navigation = () => {
           )}
 
           {user && (
-            <Button onClick={toogleHandle} className={classes.butmenu}>
+            <Button onClick={toogleHandle} className={'butmenu'}>
               menu
             </Button>
           )}
         </nav>
 
         {isOpen && (
-          <div className={classes.menu}>
+          <div className={'menu'}>
             {user && (
-              <ul className={classes.listwo}>
+              <ul className={'listwo'}>
                 {!user && (
                   <li>
-                    <Link to="reg" className={classes.txt}>
+                    <Link to="reg" className={'txt'}>
                       Auth
                     </Link>
                   </li>
                 )}
 
                 <li>
-                  <Link to={`/${date}/add-task`} className={classes.txt}>
+                  <Link to={`/${date}/add-task`} className={'txt'}>
                     add task
                   </Link>
                 </li>
 
                 <li>
-                  <Button className={classes.butlog} onClick={handleLogout}>
+                  <Button className={'butlog'} onClick={handleLogout}>
                     Log out
                   </Button>
                 </li>
               </ul>
             )}
-            <div className={classes.close} onClick={toogleHandle}>
+            <div className={'close'} onClick={toogleHandle}>
               close
             </div>
           </div>

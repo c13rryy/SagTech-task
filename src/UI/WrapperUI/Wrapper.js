@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classes from  './Wrapper.module.css';
+import '../StylesUI/StylesUI.css';
 const Wrapper = (props) => {
    return (
     <>
-    <div className={`${classes.wrapper} ${props.className ? props.className : ''}`}>
+    <div className={`${'wrapper'} ${props.className ? props.className : ''}`}>
        {props.children}
     </div>
     </>

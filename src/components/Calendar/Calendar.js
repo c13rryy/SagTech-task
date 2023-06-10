@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import AnimatedPage from "../../pages/Animated";
 import { actulDates } from "../../store/taskSlice";
-import "./Calendar.css";
+import "./CalendarStyles/Calendar.css";
 
 const Calendar = () => {
   const [da, setDays] = useState([]);

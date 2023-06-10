@@ -1,13 +1,13 @@
 import React from "react";
 
-import classes from "../InfoAboutTask/MoreTaskInfo.module.css";
+import '../../Tasks/TasksStyles/Tasks.css';
 
 import { Link, useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
 import PropTypes from "prop-types";
-import Button from "../../UI/Button";
+import Button from "../../../UI/ButtonUI/Button";
 const MoreTaskInfo = ({ inf }) => {
   const navigate = useNavigate();
 
@@ -19,23 +19,23 @@ const MoreTaskInfo = ({ inf }) => {
   const { date } = useSelector((state) => state.taskSlice);
   return (
     <>
-      <section className={classes.gapSect}>
+      <section className={'gapSect'}>
         <div>
-          <button onClick={goBack} className={classes.back}>
+          <button onClick={goBack} className={'back'}>
             go back
           </button>
         </div>
-        <div className={classes.allInfo}>
-          <h1 className={classes.tt}>{inf.title}</h1>
-          <p className={classes.txt}>{inf.info}</p>
+        <div className={'allInfo'}>
+          <h1 className={'tt'}>{inf.title}</h1>
+          <p className={'txt'}>{inf.info}</p>
         </div>
 
-        <div className={classes.buttons}>
-          <Link className={classes.links} to={`/${date}/add-task`}>
-            <Button className={classes.butt}>ADD</Button>
+        <div className={'buttons'}>
+          <Link className={'links'} to={`/${date}/add-task`}>
+            <Button className={'butt'}>ADD</Button>
           </Link>
-          <Link className={classes.links} to="edit-task">
-            <Button className={classes.butt}>EDIT</Button>
+          <Link className={'links'} to="edit-task">
+            <Button className={'butt'}>EDIT</Button>
           </Link>
         </div>
       </section>

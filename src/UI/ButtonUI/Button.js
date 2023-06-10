@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import classes from './Button.module.css'
+import '../StylesUI/StylesUI.css'
 const Button = (props) => {
   return (
-   <div className={classes.buttonLoc}>
+   <div className={'buttonLoc'}>
      <button 
     type={props.type || 'button'} 
-    className={`${classes.button} ${props.className}`}
+    className={`${'button'} ${props.className}`}
     disabled={props.disabled}
     onClick={props.onClick}
     >
     
       {props.children}
     </button>
-   </div>
+   </div> 
   );
 };
 

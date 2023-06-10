@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import MoreTaskInfo from "../components/InfoAboutTask/MoreTaskInfo";
+import MoreTaskInfo from "../components/Tasks/InfoAboutTask/MoreTaskInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useParams } from "react-router-dom";
 import { getDataTask } from "../providers/tasks/tasks";

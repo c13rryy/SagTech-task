@@ -1,0 +1,119 @@
+.sectionTask {
+  margin-top: 50px;
+}
+@media only screen and (max-width: 1024px) {
+  .sectionTask {
+    margin-top: 35px;
+  }
+}
+.sectionTask h1 {
+  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 35px;
+}
+@media only screen and (max-width: 600px) {
+  .sectionTask h1 {
+    font-size: 35px;
+  }
+}
+.sectionTask .list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+.sectionTask .list .listCheck {
+  display: flex;
+  align-items: center;
+}
+.sectionTask .list .listCheck .href {
+  text-decoration: none;
+  color: black;
+  font-size: 35px;
+  cursor: pointer;
+  transition: 0.5s;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+@media only screen and (max-width: 600px) {
+  .sectionTask .list .listCheck .href {
+    font-size: 25px;
+    font-weight: 500;
+  }
+}
+.sectionTask .list .listCheck .href:hover {
+  color: gold;
+  transition: 0.5s;
+}
+.sectionTask .list .listCheck .check {
+  width: 25px;
+  height: 25px;
+  margin: 0px;
+  margin-left: 15px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.gapSect {
+  margin-top: 50px;
+}
+@media only screen and (max-width: 800px) {
+  .gapSect {
+    margin-top: 25px;
+  }
+}
+.gapSect .back {
+  background: none;
+  height: auto;
+  border: none;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 0px;
+}
+@media only screen and (max-width: 600px) {
+  .gapSect .back {
+    width: auto;
+  }
+}
+.gapSect .allInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.gapSect .allInfo .txt {
+  font-size: 25px;
+  font-weight: 500;
+}
+@media only screen and (max-width: 800px) {
+  .gapSect .allInfo .txt {
+    font-size: 20px;
+  }
+}
+.gapSect .allInfo .tt {
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 35px;
+  margin-top: 10px;
+}
+@media only screen and (max-width: 800px) {
+  .gapSect .allInfo .tt {
+    font-size: 35px;
+  }
+}
+.gapSect .buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  gap: 15px;
+}
+@media only screen and (max-width: 600px) {
+  .gapSect .buttons {
+    flex-direction: column;
+  }
+}
+.gapSect .buttons .links {
+  text-decoration: none;
+}/*# sourceMappingURL=Tasks.css.map */

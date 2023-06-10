@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classes from './Input.module.css';
+import '../StylesUI/StylesUI.css';
 const Input = React.forwardRef((props,ref) => {
 
     return (
-        <input  className={`${classes.inputs} ${props.className}`}
+        <input  className={`${'inputs'} ${props.className}`}
         type={props.type || 'text'}
         id={props.id}
         name={props.name}

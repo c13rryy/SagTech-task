@@ -1,0 +1,110 @@
+@import "../../../StyleGlobal/Style.scss";
+
+@mixin onlylarge($w) {
+  @media only screen and (max-width: $w) {
+    @content;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  font-family: "Roboto", sans-serif;
+  @include onlylarge(1024px) {
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+  .logo {
+    font-weight: bold;
+    font-size: 40px;
+    transition: 0.5s;
+    cursor: pointer;
+    text-decoration: none;
+    color: $blackcolor;
+  }
+  &:hover {
+    color: $orange;
+    transition: 0.5s;
+  }
+  .nav {
+    display: flex;
+    .list {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      @include onlylarge(1024px) {
+        display: none;
+      }
+      .txt {
+        font-weight: 500;
+        font-size: 20px;
+        text-decoration: none;
+        color: $blackcolor;
+        cursor: pointer;
+        transition: 0.5s;
+      }
+
+      &:hover {
+        color: $orange;
+        transition: 0.5s;
+      }
+    }
+
+    .butmenu {
+      width: 100px;
+      display: none;
+      @include onlylarge(1024px) {
+        display: block;
+      }
+    }
+  }
+  .menu {
+    position: absolute;
+    width: 100%;
+    background-color: $aqua;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    height: 60px;
+    .listwo {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      @include onlylarge(1024px) {
+        .butlog {
+          margin-top: 0px;
+        }
+      }
+    }
+
+    .close {
+      position: absolute;
+      right: 3%;
+      top: 20%;
+      cursor: pointer;
+    }
+  }
+}
+
+.menu-enter {
+  opacity: 0;
+}
+
+.menu-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.menu-exit {
+  opacity: 1;
+}
+
+.menu-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}

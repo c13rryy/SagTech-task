@@ -10,7 +10,7 @@ const RootLayout = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const location = useLocation();
   const { user } = useSelector((state) => state.auth);
-  const newUser = useMemo(() => user,[user]);
+  const newUser = useMemo(() => user, [user]);
   const { date } = useSelector((state) => state.taskSlice);
 
   useEffect(() => {

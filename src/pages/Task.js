@@ -7,38 +7,38 @@ import { useDispatch, useSelector } from "react-redux";
 import { getId, numberDate } from "../store/taskSlice";
 
 import { getData } from "../providers/tasks/tasks";
-import moment from 'moment';
-import 'moment/locale/ru';  
+import moment from "moment";
+import "moment/locale/ru";
 import { getAllInfo } from "../store/information";
 
-import ShowTask from "../components/ShowTasks/ShowTask";
+import ShowTask from "../components/Tasks/ShowTasks/ShowTask";
 
 import { infoForCalendar } from "../store/information";
 
 import { getDataTask } from "../providers/tasks/tasks";
 
-import { deleteTaskByDate } from '../providers/tasks/tasks';  
+import { deleteTaskByDate } from "../providers/tasks/tasks";
 
 import AnimatedPage from "./Animated";
-import Wrapper from "../UI/Wrapper";
+import Wrapper from "../UI/WrapperUI/Wrapper";
 
-import Button from "../UI/Button";
+import Button from "../UI/ButtonUI/Button";
 import { useCallback } from "react";
 
 const Task = () => {
   const { date } = useSelector((state) => state.taskSlice);
-  const newDate = useMemo(() => date , [date]);
+  const newDate = useMemo(() => date, [date]);
   const { information } = useSelector((state) => state.information);
   const { realDates } = useSelector((state) => state.taskSlice);
-  const newRealDates  = useMemo(() => realDates, [realDates]);
-  const {correctDate} = useSelector((state) => state.taskSlice);
+  const newRealDates = useMemo(() => realDates, [realDates]);
+  const { correctDate } = useSelector((state) => state.taskSlice);
   const newCorrectDate = useMemo(() => correctDate, [correctDate]);
   const { user } = useSelector((state) => state.auth);
   const location = useLocation();
   const { index } = useParams();
 
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-   const [reloadPage, setReloadPage] = useState(false);
+  const [reloadPage, setReloadPage] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -50,10 +50,10 @@ const Task = () => {
 
   const loadTasks = useCallback(async () => {
     setIsDataLoaded(false);
-     if(newCorrectDate !== undefined && newCorrectDate !== null){
+    if (newCorrectDate !== undefined && newCorrectDate !== null) {
       const loadedTasks = await getData(newCorrectDate);
       dispatch(getAllInfo(loadedTasks));
-     }
+    }
     setIsDataLoaded(true);
   }, [newCorrectDate, reloadPage]);
 
@@ -77,31 +77,26 @@ const Task = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const delDat = moment().format('DD-MM-YYYY');
+      const delDat = moment().format("DD-MM-YYYY");
       const currentTime = moment();
       const targetTime = moment().set({ hour: 23, minute: 59, second: 59 });
       if (currentTime.isSame(targetTime)) {
         deleteTaskByDate(delDat);
         setReloadPage(true);
-
       }
     }, 1000);
 
     return () => {
-      clearInterval(interval); 
+      clearInterval(interval);
     };
-  }, []); 
+  }, []);
 
-  const className = !user ? "bg" : "";
+/*   const className = !user ? "bg" : ""; */
   return (
     <React.Fragment>
       <AnimatedPage>
         <div>
           <Wrapper>
-            <section className={className}>
-              {!user && <p className="invalid">CONTENT INVALID</p>}
-            </section>
-
             {user && location.pathname === `/${newDate}` && isDataLoaded && (
               <ShowTask info={memoizedInformation} />
             )}

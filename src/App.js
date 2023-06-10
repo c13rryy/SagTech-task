@@ -9,7 +9,6 @@ import Edit from './pages/Edit';
 import MoreTask from './pages/MoreTask';
 import Add from './pages/Add';
 
-import './app.css';
 import ErrorPage from './pages/Error';
 
 

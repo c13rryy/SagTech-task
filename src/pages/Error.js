@@ -1,11 +1,11 @@
 import Navigation from "../components/HeaderNavigation/Navigation";
 import React from "react";
 import PageContent from "../components/TextForErrors/PageContent";
-import Wrapper from "../UI/Wrapper";
+import Wrapper from "../UI/WrapperUI/Wrapper";
 
 const ErrorPage = () => {
-  let title = "An error occured !";
-  let message = "Smth went wrong";
+  const title = "An error occured !";
+  const message = "Smth went wrong";
 
   return (
     <>

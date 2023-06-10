@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import classes from "./LoginForm.module.css";
+import  '../FormStyles/Form.css';
 import PropTypes from "prop-types";
-import Button from "../../../UI/Button";
-import Wrapper from "../../../UI/Wrapper";
-import Input from "../../../UI/Input";
+import Button from "../../../UI/ButtonUI/Button";
+import Wrapper from "../../../UI/WrapperUI/Wrapper";
+import Input from "../../../UI/InputUI/Input";
 
 const RegForm = (props) => {
   const location = useLocation();
@@ -29,11 +29,11 @@ const RegForm = (props) => {
   return (
     <React.Fragment>
       <Wrapper>
-        <section className={classes.sectionForm}>
+        <section className={'sectionForm'}>
           <h1>{page ? "Regist" : "Login"}</h1>
           <form
             onSubmit={page ? handleSubmitReg : handleSubmitLogin}
-            className={classes.form}
+            className={'form'}
           >
             <div>
               <label htmlFor="email">Email</label>
@@ -57,8 +57,8 @@ const RegForm = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className={classes.buttons}>
-              <Link className={classes.signup} to={page ? "/login" : "/reg"}>
+            <div className={'buttons'}>
+              <Link className={'signup'} to={page ? "/login" : "/reg"}>
                 {page ? "Login in" : "Registr"}
               </Link>
               <Button type="submit">Send</Button>

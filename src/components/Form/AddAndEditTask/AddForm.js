@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from "react";
-import classes from "./AddForm.module.css";
+import '../FormStyles/Form.css';
 
 import { addTask, getDataTask } from "../../../providers/tasks/tasks";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,9 +8,9 @@ import { updateTask } from "../../../providers/tasks/tasks";
 
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import Button from "../../../UI/Button";
-import Wrapper from "../../../UI/Wrapper";
-import Input from "../../../UI/Input";
+import Button from "../../../UI/ButtonUI/Button";
+import Wrapper from "../../../UI/WrapperUI/Wrapper";
+import Input from "../../../UI/InputUI/Input";
 import { infoForCalendar } from "../../../store/information";
 
 const AddForm = ({ some }) => {
@@ -77,16 +77,16 @@ const AddForm = ({ some }) => {
 
   return (
     <Wrapper>
-      <section className={classes.sectionForm}>
+      <section className={'sectionForm'}>
         {!some && (
-          <div className={classes.goback}>
-            <button onClick={goBack} className={classes.back}>
+          <div className={'goback'}>
+            <button onClick={goBack} className={'back'}>
               go back
             </button>
           </div>
         )}
-        <h1 className={classes.tag}>{some ? "Edit Task" : "Add Task"}</h1>
-        <form onSubmit={submitHandler} className={classes.form}>
+        <h1 className={'tag'}>{some ? "Edit Task" : "Add Task"}</h1>
+        <form onSubmit={submitHandler} className={'form'}>
           <div>
             <label htmlFor="text-title">Title</label>
             <Input
@@ -99,10 +99,10 @@ const AddForm = ({ some }) => {
             />
           </div>
 
-          <div className={classes.txt}>
+          <div className={'txt'}>
             <label htmlFor="text-info">All info</label>
             <textarea
-              className={classes.txt}
+              className={'txt'}
               rows="10"
               cols="50"
               id="text-two"
@@ -113,7 +113,7 @@ const AddForm = ({ some }) => {
             />
           </div>
 
-          <div className={classes.addButton}>
+          <div className={'addButton'}>
             <Button type="submit" disabled={isButtonDisabled}>
               {some ? "Edit" : "Add"}
             </Button>

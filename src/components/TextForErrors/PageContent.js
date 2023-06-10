@@ -1,4 +1,4 @@
-import classes from "./PageContent.module.css";
+import "../StylesForStartAndError/StylesForStartAndError.css";
 import React from "react";
 
 import PropTypes from "prop-types";
@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 function PageContent({ title, children }) {
   return (
     <>
-      <div className={classes.content}>
+      <div className={'content'}>
         <h1>{title}</h1>
         {children}
       </div>
