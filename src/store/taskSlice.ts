@@ -1,8 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+// TODO: нейминг плохой. Вот этот файл taskSlice - хороший, остальыне тоже добавить Slice в конце
+
+// TODO: плохой пример интерфейса. 
 interface TaskStatusInfo {
   [key: string]: string[];
 }
+// TODO: пробел
 interface TaskSlice {
   date: string | number;
   taskId: string | null;

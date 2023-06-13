@@ -15,6 +15,8 @@ interface SomeProp {
   some?: TasksInfo;
 }
 
+// TODO: нейминг файла должен совпадать с неймингом файла
+
 const AddForm: React.FC<SomeProp> = ({ some }) => {
   const dispatch = useAppDispatch();
   const { date } = useAppSelector((state) => state.taskSlice);

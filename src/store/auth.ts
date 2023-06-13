@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// TODO: очень плохой пример интерфейса, нужно использовать преимущества ts, а не создавать такие классы, это мешает адекватной типизации
 interface AuthType {
   [key: string]: string | null | boolean;
 }

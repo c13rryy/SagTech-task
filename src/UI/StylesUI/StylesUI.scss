@@ -1,5 +1,7 @@
+// TODO: @import - устаревший метод, надо юзать @use. Загугли и почитай
 @import "../../StyleGlobal/Style.scss";
 
+// TODO: вынести миксин в отдельный файл, где у нас будет собраны все глобальные миксины, все переменные и остальное
 @mixin onlylarge($w) {
   @media only screen and (max-width: $w) {
     @content;

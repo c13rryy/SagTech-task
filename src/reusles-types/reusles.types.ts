@@ -1,3 +1,5 @@
+// TODO: что такое reusles types?
+
 export interface InfoFromInput {
   title: string;
   info: string;

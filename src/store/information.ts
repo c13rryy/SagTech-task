@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { InformationSlice } from "../reusles-types/reusles.types";
+// TODO: прибел, нужный кодстайл
 interface SliceAboutInfo {
   information: InformationSlice[];
   allInfo: InformationSlice[];
@@ -11,7 +12,6 @@ const initialState: SliceAboutInfo = {
   allInfo: [],
 };
 
-// TODO: name show поменяй
 const information = createSlice({
   name: "information",
   initialState,
